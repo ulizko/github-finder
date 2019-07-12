@@ -6,7 +6,7 @@ import GithubContext from '../../context/github/githubContext';
 
 const User = ({ match }) => {
   const githubContext = useContext(GithubContext);
-  const { loading, getUser, getUserRepos } = githubContext;
+  const { loading, getUser, getUserRepos, user } = githubContext;
 
   useEffect(() => {
     getUser(match.params.login);
@@ -27,7 +27,7 @@ const User = ({ match }) => {
     following,
     public_repos,
     public_gists,
-  } = githubContext.user;
+  } = user;
 
   if (loading) {
     return <Spinner />;

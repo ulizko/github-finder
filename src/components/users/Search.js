@@ -1,10 +1,14 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import GithubContext from '../../context/github/githubContext';
+import AlertContext from '../../context/alert/alertContext';
 
-const Search = ({ showAlert }) => {
+const Search = () => {
   const githubContext = useContext(GithubContext);
-  const { users, clearUsers } = githubContext;
+  const alertContext = useContext(AlertContext);
+
+  const { users, clearUsers, searchUsers } = githubContext;
+  const { showAlert } = alertContext;
   const [text, setText] = useState('');
 
   const onChange = e => {
@@ -17,7 +21,7 @@ const Search = ({ showAlert }) => {
     if (text === '') {
       showAlert('Please enter something', 'light');
     } else {
-      githubContext.searchUsers(text);
+      searchUsers(text);
       setText('');
     }
   };
